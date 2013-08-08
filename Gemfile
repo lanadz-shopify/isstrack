@@ -13,6 +13,7 @@ group :assets do
   gem 'sass-rails',   '~> 3.2.3'
   gem 'bootstrap-sass', '~> 2.3.2.1'
   gem 'coffee-rails', '~> 3.2.1'
+  gem 'devise'
   gem 'thin'
   # See https://github.com/sstephenson/execjs#readme for more supported runtimes
   # gem 'therubyracer', :platforms => :ruby
@@ -31,6 +32,7 @@ group :development, :test do
   gem 'launchy'
   gem 'pry-rails'
   gem 'selenium-webdriver'
+  gem 'annotate'
 end
 
 group :test do

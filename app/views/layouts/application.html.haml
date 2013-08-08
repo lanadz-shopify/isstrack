@@ -1,9 +1,34 @@
-!!!
-%html
+!!! 5
+%html(lang="en")
   %head
-    %title "Simple Issue Tracker"
+    %meta(charset="utf-8")
+    %meta(http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1")
+    %meta(name="viewport" content="width=device-width, initial-scale=1.0")
+    %title= "Issue Tracker - Administration"
+    = csrf_meta_tags
     = stylesheet_link_tag    "application"
     = javascript_include_tag "application"
-    = csrf_meta_tags
+
   %body
-    = yield
+    .navbar.navbar-static-top
+      .navbar-inner
+        .container
+          %a.btn.btn-navbar(data-target=".nav-collapse" data-toggle="collapse")
+            %span.icon-bar
+            %span.icon-bar
+            %span.icon-bar
+          %a.brand(href="/") Issue Tracker
+          .container.nav-collapse
+            %ul.nav
+
+              /%li= link_to "Admin", '#'
+              /%li= link_to "Sign In", 'sign_in_path'
+
+    .container
+
+      .row
+        .span12
+          = yield
+
+      %footer
+        %p &copy; Company 2013

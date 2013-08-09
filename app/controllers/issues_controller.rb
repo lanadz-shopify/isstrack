@@ -1,5 +1,7 @@
 class IssuesController < ApplicationController
 
+  before_filter :redirect_to_admin
+
   def show
     @issue = Issue.find_by_hash_name params[:id]
 
@@ -28,7 +30,7 @@ class IssuesController < ApplicationController
     respond_to do |format|
       if @issue.save
         @issue.generate_hash
-        @issue.save
+        HistoryItem.new.create_from(@issue)
 
         format.html { redirect_to @issue, notice: 'Issue was successfully created.' }
         format.json { render json: @issue, status: :created, location: @issue }

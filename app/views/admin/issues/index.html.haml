@@ -1,17 +1,36 @@
-%h1 Listing issues
+%h1 Issues
 
-%table
+%table.table.table-striped
   %tr
     %th
+      Subject
     %th
+      Body
     %th
+      Department
+    %th
+      Assignee
+    %th
+      Status
+    %th
+      Action
 
   - @issues.each do |issue|
     %tr
-      %td= link_to 'Show', issue
-      %td= link_to 'Edit', edit_issue_path(issue)
-      %td= link_to 'Destroy', issue, :method => :delete, :data => { :confirm => 'Are you sure?' }
+      %td
+        = issue.subject
+      %td
+        = issue.body
+      %td
+        = issue.department.try(:title)
+      %td
+        = issue.user
+      %td{class: issue.status}
+        = t "status.#{issue.status}"
+      %td
+        = link_to 'Show', issue
+        = " | "
+        = link_to 'Edit', issue
 
 %br
 
-= link_to 'New Issue', new_issue_path

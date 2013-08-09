@@ -2,9 +2,7 @@ IssueTracker::Application.routes.draw do
 
   resources :history_items
 
-
   resources :issues
-
 
   devise_for :users
 

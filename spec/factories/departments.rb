@@ -2,5 +2,6 @@
 
 FactoryGirl.define do
   factory :department do
+    title "Test Department"
   end
 end

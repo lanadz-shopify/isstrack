@@ -13,7 +13,6 @@ group :assets do
   gem 'sass-rails',   '~> 3.2.3'
   gem 'bootstrap-sass', '~> 2.3.2.1'
   gem 'coffee-rails', '~> 3.2.1'
-  gem 'devise'
   gem 'thin'
   # See https://github.com/sstephenson/execjs#readme for more supported runtimes
   # gem 'therubyracer', :platforms => :ruby
@@ -24,6 +23,8 @@ end
 gem 'jquery-rails'
 gem 'haml-rails'
 gem 'simple_form'
+gem 'devise'
+gem 'friendly_id', github: 'FriendlyId/friendly_id', branch: 'master'
 
 group :development, :test do
   gem 'rspec-rails', '~> 2.0'

@@ -3,8 +3,8 @@
 
 en:
   status:
-    waiting_staff: ʻWaiting for Staff Responseʼ
-    waiting_customer: ʻWaiting for Customerʼ
-    on_hold: ʻOn Holdʼ
-    canceled: ʻCancelledʼ
-    completed: ʻCompletedʼ
+    waiting_staff: Waiting for Staff Response
+    waiting_customer: Waiting for Customer
+    on_hold: On Hold
+    canceled: Cancelled
+    completed: Completed

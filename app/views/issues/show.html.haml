@@ -1,6 +1,11 @@
-%p#notice= notice
+%table.table.table-bordered.issue_card
+  %tr
+    %td
+      = @issue.subject
+    %td{class: @issue.status}
+      = t "status.#{@issue.status}"
+  %tr
+    %td{colspan: 2}
+      = @issue.body
 
 
-= link_to 'Edit', edit_issue_path(@issue)
-\|
-= link_to 'Back', issues_path

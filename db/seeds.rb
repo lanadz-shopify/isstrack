@@ -6,3 +6,4 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 1.upto(6) { |i| Department.create( {title: "Department #{i}"}, as: :seed) }
+1.upto(10) { |i| User.create!({ email: "user#{i}@aa.com", password: "password_#{i}" }) }

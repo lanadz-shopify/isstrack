@@ -1,7 +1,7 @@
 class IssuesController < ApplicationController
 
   def show
-    @issue = Issue.find(params[:id])
+    @issue = Issue.find_by_hash_name params[:id]
 
     respond_to do |format|
       format.html # show.html.erb

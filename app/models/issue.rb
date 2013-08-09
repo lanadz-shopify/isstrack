@@ -15,7 +15,7 @@ class Issue < ActiveRecord::Base
   end
 
   def to_param
-    "#{id}-#{hash_name}".parameterize
+    "#{hash_name}".parameterize
   end
 
 end

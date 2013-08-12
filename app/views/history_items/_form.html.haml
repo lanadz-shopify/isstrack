@@ -12,7 +12,7 @@
     %tr
       %td
         = f.input :issue_id, input_html: {value: @issue.id}, as: :hidden
-        = f.input :assignee_id, input_html: {value: @issue.assignee.id}, as: :hidden
+        = f.input :assignee_id, input_html: {value: @issue.assignee.try(:id)}, as: :hidden
         = f.input :status, input_html: {value: 'waiting_staff'}, as: :hidden
         = f.input :subject
       %td.waiting_staff

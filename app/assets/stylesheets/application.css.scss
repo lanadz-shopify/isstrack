@@ -36,11 +36,20 @@ textarea{
 .issue_card{
   width: 100%;
   margin: 30px 0;
-  td{ width: 50%; }
+  td{ width: 33%; }
 }
-.waiting_staff, .on_hold, .canceled, .completed { text-align: center; font-weight: bold; }
-.waiting_staff { background-color: #eee; color: #000; }
-.on_hold {  background-color: #ddd; color: #999;  }
-.canceled {  background-color: #a00; color: #fff;  }
-.completed {  background-color: #0a0; color: #fff;  }
+
+// code-coloring
+.waiting_staff, .waiting_customer, .on_hold, .canceled, .completed {
+  text-align: center !important;
+  font-weight: bold;
+  vertical-align: middle !important;
+}
+.waiting_staff { background-color: #eee !important; color: #000; }
+.waiting_customer { background-color: #efe !important; color: #000; }
+.on_hold {  background-color: #ddd !important; color: #999;  }
+.canceled {  background-color: #a00 !important; color: #fff;  }
+.completed {  background-color: #0a0 !important; color: #fff;  }
+
+.inline{ display: inline-block;}
 

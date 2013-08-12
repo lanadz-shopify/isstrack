@@ -24,7 +24,6 @@ gem 'jquery-rails'
 gem 'haml-rails'
 gem 'simple_form'
 gem 'devise'
-gem 'friendly_id', github: 'FriendlyId/friendly_id', branch: 'master'
 
 group :development, :test do
   gem 'rspec-rails', '~> 2.0'

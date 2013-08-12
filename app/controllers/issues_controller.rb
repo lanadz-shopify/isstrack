@@ -4,7 +4,7 @@ class IssuesController < ApplicationController
 
   def show
     @issue = Issue.find_by_hash_name params[:id]
-
+    @history_items = @issue.history_items.offset(1).order('created_at ASC')
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @issue }
@@ -30,7 +30,7 @@ class IssuesController < ApplicationController
     respond_to do |format|
       if @issue.save
         @issue.generate_hash
-        HistoryItem.new.create_from(@issue)
+        @issue.history_items.build.create_from(@issue)
 
         format.html { redirect_to @issue, notice: 'Issue was successfully created.' }
         format.json { render json: @issue, status: :created, location: @issue }

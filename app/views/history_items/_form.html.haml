@@ -1,7 +1,7 @@
 - statuses = {}
-- Issue::STATUSES.each  {|s| statuses[t("status.#{s}")] = s }
+- Issue::STATUSES.each {|s| statuses[t("status.#{s}")] = s }
 
-= simple_form_for @history_item, url: admin_issue_history_items_path do |f|
+= simple_form_for @history_item, url: issue_history_items_path do |f|
   - if @history_item.errors.any?
     #error_explanation
       %h2= "#{pluralize(@history_item.errors.count, "error")} prohibited this history_item from being saved:"
@@ -12,11 +12,12 @@
     %tr
       %td
         = f.input :issue_id, input_html: {value: @issue.id}, as: :hidden
-        = f.input :subject #, input_html: {disabled: :disabled}
-      %td
-        = f.association :assignee, label_method: :email, value_method: :id, prompt: "Choose an Assignee", selected: @issue.assignee.try(:id)
-      %td
-        = f.input :status, collection: statuses
+        = f.input :assignee_id, input_html: {value: @issue.assignee.id}, as: :hidden
+        = f.input :status, input_html: {value: 'waiting_staff'}, as: :hidden
+        = f.input :subject
+      %td.waiting_staff
+        / = f.input :status, collection: statuses
+        = t 'status.waiting_staff'
     %tr
       %td{colspan: 3}
         = f.input :body
@@ -24,5 +25,5 @@
   .row
     .actions
       = f.submit 'Save', class: 'btn btn-primary submit'
-      = link_to 'Cancel', admin_issue_path(@issue), class: 'btn btn-default submit'
+      = link_to 'Cancel', issue_path(@issue), class: 'btn btn-default submit'
       .clearfix

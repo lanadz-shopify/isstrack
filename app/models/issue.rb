@@ -16,13 +16,18 @@
 #
 
 class Issue < ActiveRecord::Base
-  STATUSES = %w[waiting_staff on_hold canceled completed]
+  STATUSES = %w[waiting_staff waiting_customer on_hold canceled completed]
+
+  scope :unassigned, -> { where(assignee_id: nil)}
+  scope :opened, -> { where('status = "waiting_staff" OR status = "waiting_customer"')}
+  scope :on_hold, -> { where(status: :on_hold)}
+  scope :closed, -> { where('status = "canceled" or status = "completed"')}
 
   attr_accessible :subject, :body, :customer_email, :customer_name, :department_id
-  attr_accessible :assignee, :status, as: :admin
+  # attr_accessible :assignee, :status, as: :admin
 
   belongs_to :department
-  belongs_to :user, foreign_key: :assignee_id
+  belongs_to :assignee, class_name: User, foreign_key: :assignee_id
   has_many :history_items
 
   validates_presence_of :subject, :body, :customer_email, :customer_name
@@ -36,4 +41,9 @@ class Issue < ActiveRecord::Base
     "#{hash_name}".parameterize
   end
 
+  def from(history_item)
+    self.status = history_item.status
+    self.assignee = history_item.assignee
+    self
+  end
 end

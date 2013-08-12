@@ -13,8 +13,10 @@
 #
 
 class HistoryItem < ActiveRecord::Base
+  attr_accessible :subject, :body, :department_id, :status, :assignee_id, :issue_id
+
   belongs_to :issue
-  belongs_to :user, foreign_key: :assignee_id
+  belongs_to :assignee, class_name: User, foreign_key: :assignee_id
 
   def create_from(issue)
     self.subject = issue.subject
@@ -22,5 +24,11 @@ class HistoryItem < ActiveRecord::Base
     save!
   end
 
+ def new_from(issue)
+    self.subject = issue.subject
+    self.assignee = issue.assignee
+    self.status = issue.status
+    self
+ end
 
 end

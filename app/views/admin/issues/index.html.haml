@@ -1,36 +1,45 @@
-%h1 Issues
+.row
+  .container
+    .span6
+      %h3.inline= "Tickets : "
+      -  views = [ 'All','New Unassigned', 'Opened', 'On Hold', 'Closed' ]
+      = select_tag :change_view, options_for_select(views, @filter), class: 'inline'
 
-%table.table.table-striped
-  %tr
-    %th
-      Subject
-    %th
-      Body
-    %th
-      Department
-    %th
-      Assignee
-    %th
-      Status
-    %th
-      Action
-
-  - @issues.each do |issue|
+.row
+  %table.table.table-striped
     %tr
-      %td
-        = issue.subject
-      %td
-        = issue.body
-      %td
-        = issue.department.try(:title)
-      %td
-        = issue.user
-      %td{class: issue.status}
-        = t "status.#{issue.status}"
-      %td
-        = link_to 'Show', issue
-        = " | "
-        = link_to 'Edit', issue
+      %th
+        Subject
+      %th
+        Body
+      %th
+        Department
+      %th
+        Assignee
+      %th
+        Status
+      %th
+        Action
 
-%br
+    - @issues.each do |issue|
+      %tr
+        %td
+          = issue.subject
+        %td
+          = issue.body
+        %td
+          = issue.department.blank? ? '-' :issue.department.title
+        %td{id: "assignee_#{issue.id}"}
+          - if issue.assignee.nil?
+            = link_to 'Take ownership', take_ownership_admin_issue_url(issue), remote: true
+          - else
+            = issue.assignee.email
+            / = link_to('x', take_ownership_admin_issue_url(issue), class: 'btn btn-danger btn-small', remote: true)
+        %td{class: issue.status}
+          = t "status.#{issue.status}"
+        %td
+          = link_to 'Show', admin_issue_path(issue)
+
+
+  %br
 

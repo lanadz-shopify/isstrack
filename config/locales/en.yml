@@ -8,3 +8,8 @@ en:
     on_hold: On Hold
     canceled: Cancelled
     completed: Completed
+  view:
+    unassigned: New Unassigned
+    opened: Opened
+    on_hold: On Hold
+    closed: Closed

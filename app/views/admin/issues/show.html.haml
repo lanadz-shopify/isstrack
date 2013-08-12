@@ -1,6 +1,19 @@
-%p#notice= notice
-
-
-= link_to 'Edit', edit_issue_path(@issue)
-\|
-= link_to 'Back', issues_path
+.row
+  - @history_items.each do |history_item|
+    %table.table.table-bordered.issue_card
+      %tr
+        %td
+          = history_item.subject
+        %td
+          = l history_item.created_at, format: :short
+        %td
+          = history_item.assignee.try(:email)
+        %td{class: history_item.status}
+          = t "status.#{history_item.status}"
+      %tr
+        %td{colspan: 4}
+          = history_item.body
+.row
+  .actions
+    = link_to 'Update Issue', new_admin_issue_history_item_path(@issue, @new_history_item), class: 'btn btn-primary submit'
+    .clearfix

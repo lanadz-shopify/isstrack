@@ -2,7 +2,8 @@ require 'spec_helper'
 
 describe "issues/show" do
   before(:each) do
-    @issue = assign(:issue, stub_model(Issue))
+    @issue = assign(:issue, FactoryGirl.create(:issue))
+    @history_items = assign(:history_items, FactoryGirl.create_list(:history_item, 3, issue: @issue))
   end
 
   it "renders attributes in <p>" do

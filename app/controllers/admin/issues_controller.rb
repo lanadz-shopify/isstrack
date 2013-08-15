@@ -5,20 +5,7 @@ class Admin::IssuesController < ApplicationController
   respond_to :js, only: [:take_ownership]
 
   def index
-    @issues = Issue.all
-    @filter = case params[:filter]
-      when 'all'
-        'All'
-      when 'unassigned'
-        'New Unassigned'
-      when 'opened'
-        'Opened'
-      when 'on_hold'
-       'On Hold'
-     when 'closed'
-      'Closed'
-    end
-    @issues = Issue.send(params[:filter].to_sym) if params[:filter]
+    @issues = Issue::VIEWS.include?(params[:filter] ) ? Issue.send(params[:filter].to_sym) : Issue.unscoped
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @issues }
@@ -29,8 +16,7 @@ class Admin::IssuesController < ApplicationController
   # GET /issues/1.json
   def show
     @issue = Issue.find_by_hash_name(params[:id])
-    @history_items = @issue.history_items.order('created_at ASC').offset(1) # first is initial
-    @new_history_item = @issue.history_items.build.new_from(@issue)
+    @history_items = @issue.history_items.order('created_at ASC')
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @issue }

@@ -11,7 +11,7 @@
       = @issue.body
 .row
   .actions
-    = link_to 'Update Issue', new_issue_history_item_path(@issue, @new_history_item), class: 'btn btn-primary submit'
+    = link_to 'Update Issue', new_issue_history_item_path(@issue, @issue.history_items.build), class: 'btn btn-primary submit'
     .clearfix
 
 - if @history_items.size > 0

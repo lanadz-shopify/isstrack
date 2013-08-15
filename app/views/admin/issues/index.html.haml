@@ -2,8 +2,7 @@
   .container
     .span6
       %h3.inline= "Tickets : "
-      -  views = [ 'All','New Unassigned', 'Opened', 'On Hold', 'Closed' ]
-      = select_tag :change_view, options_for_select(views, @filter), class: 'inline'
+      = select_tag :change_view, options_for_select(Issue::VIEWS.map{|view| [view.humanize, view]}, params[:filter]), class: 'inline'
 
 .row
   %table.table.table-striped

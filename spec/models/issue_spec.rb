@@ -23,21 +23,19 @@ describe Issue do
   it { should have_many :history_items }
 
   describe '#generate_hash' do
+    context "with department" do
+      let(:issue) { FactoryGirl.create :issue }
+      before { issue.generate_hash }
 
-
-    let(:issue1) { FactoryGirl.create :issue }
-    let(:issue2) { FactoryGirl.create :issue, department: nil}
-
-
-    it "with department" do
-      issue1.generate_hash
-      issue1.hash_name.should eq("TES-#{issue1.id.to_s.rjust(6,'0')}")
-    end
-    it "without department" do
-      issue2.generate_hash
-      issue2.hash_name.should eq("NON-#{issue2.id.to_s.rjust(6,'0')}")
+      it{ issue.hash_name.should eq("TES-#{issue.id.to_s.rjust(6,'0')}") }
     end
 
+    context "without department" do
+      let(:issue) { FactoryGirl.create :issue, department: nil }
+      before { issue.generate_hash }
+
+      it{ issue.hash_name.should eq("NON-#{issue.id.to_s.rjust(6,'0')}") }
+    end
   end
 
 end

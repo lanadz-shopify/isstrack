@@ -17,18 +17,21 @@ class HistoryItem < ActiveRecord::Base
 
   belongs_to :issue
   belongs_to :assignee, class_name: User, foreign_key: :assignee_id
+  after_save :update_issue
 
-  def create_from(issue)
-    self.subject = issue.subject
-    self.body = issue.body
-    save!
-  end
-
- def new_from(issue)
+  def new_from(issue)
     self.subject = issue.subject
     self.assignee = issue.assignee
     self.status = issue.status
     self
- end
+  end
+
+  private
+
+  def update_issue
+    self.issue.status = self.status
+    self.issue.assignee = self.assignee
+    self.issue.save
+  end
 
 end

@@ -1,6 +1,3 @@
-- statuses = {}
-- Issue::STATUSES.each {|s| statuses[t("status.#{s}")] = s }
-
 = simple_form_for @history_item, url: issue_history_items_path do |f|
   - if @history_item.errors.any?
     #error_explanation
@@ -16,7 +13,6 @@
         = f.input :status, input_html: {value: 'waiting_staff'}, as: :hidden
         = f.input :subject
       %td.waiting_staff
-        / = f.input :status, collection: statuses
         = t 'status.waiting_staff'
     %tr
       %td{colspan: 3}

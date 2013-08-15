@@ -1,6 +1,3 @@
-- statuses = {}
-- Issue::STATUSES.each  {|s| statuses[t("status.#{s}")] = s }
-
 = simple_form_for @history_item, url: admin_issue_history_items_path do |f|
   - if @history_item.errors.any?
     #error_explanation
@@ -12,11 +9,11 @@
     %tr
       %td
         = f.input :issue_id, input_html: {value: @issue.id}, as: :hidden
-        = f.input :subject #, input_html: {disabled: :disabled}
+        = f.input :subject
       %td
         = f.association :assignee, label_method: :email, value_method: :id, prompt: "Choose an Assignee", selected: @issue.assignee.try(:id)
       %td
-        = f.input :status, collection: statuses
+        = f.input :status, collection: Issue::STATUSES.map{ |s| [t("status.#{s}"), s] }
     %tr
       %td{colspan: 3}
         = f.input :body

@@ -1,0 +1,31 @@
+%p
+  = "Hello #{@issue.customer_name},"
+%p
+  Issue
+  = link_to @issue.hash_name, issue_url(@issue, host: 'localhost:3000')
+  was updated.
+  %table{style: 'width: 100%; border: 1px solid #ddd;'}
+    %tr
+      %td
+        %span{style: "font-size: 80%; color: #eee;"}
+        No.
+        %br
+        = @issue.hash_name
+      %td
+        %span{style: "font-size: 80%; color: #eee;"}
+        Department
+        %br
+        = @issue.department.present? ? @issue.department.title : "-"
+      %td
+        %span{style: "font-size: 80%; color: #eee;"}
+        Responsible Person
+        %br
+        = @issue.assignee.present? ?  @issue.assignee.name : '-'
+      %td
+        = t("status.#{@issue.status}")
+    %tr
+      %td{colspan: 4}
+        = @issue.history_items.present? ? @issue.history_items.last.body : @issue.body
+%p
+  Please do not reply. This message is automatically generated.
+  Thank you.

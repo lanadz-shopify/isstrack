@@ -25,14 +25,12 @@ describe Issue do
   describe '#generate_hash' do
     context "with department" do
       let(:issue) { FactoryGirl.create :issue }
-      before { issue.generate_hash }
 
       it{ issue.hash_name.should eq("TES-#{issue.id.to_s.rjust(6,'0')}") }
     end
 
     context "without department" do
       let(:issue) { FactoryGirl.create :issue, department: nil }
-      before { issue.generate_hash }
 
       it{ issue.hash_name.should eq("NON-#{issue.id.to_s.rjust(6,'0')}") }
     end

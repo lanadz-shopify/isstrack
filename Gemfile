@@ -33,6 +33,7 @@ group :development, :test do
   gem 'pry-rails'
   gem 'selenium-webdriver'
   gem 'annotate'
+  gem "letter_opener"
 end
 
 group :test do
@@ -44,5 +45,5 @@ group :development do
   gem 'better_errors'
   gem "binding_of_caller"
   gem 'quiet_assets'
-  gem "letter_opener"
+
 end
